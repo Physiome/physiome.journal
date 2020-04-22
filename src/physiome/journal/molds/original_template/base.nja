@@ -1,0 +1,53 @@
+<!-- Top navigation bar -->
+<div style="background-color: white;">
+  <div class="row">
+    <div class="small-8 column"><a href="{{site_root}}"><img src="{{ asset_root }}Physiome-beside-middle.png" alt="Physiome logo" style="width:100%;height:100%;"></a><span style="margin-left:10px"></span></div>
+    <div class="small-4 column" style="text-align:right">
+    </div>
+  </div>
+</div>
+<div style="background-color: #000000;">
+  <div class="row">
+    <div class="small-12 column">
+      <div class="top-bar" style="background-color: #000000;">
+        <div class="top-bar-left">
+          <ul class="menu" style="background-color: #000000;">
+            <li><a href="{{site_root}}" style=" color:white;">Home</a></li>
+            <li><a href="{{site_root}}physiome-project" style=" color:white;">The Physiome Project</a></li>
+            <li><a href="{{site_root}}about" style=" color:white;">About the Journal</a></li>
+    <li><a href="{{site_root}}instructions-to-authors" style=" color:white;">Author instructions</a></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu" style="background-color: #000000; color:#4e4c51;">
+            <li><input type="text" placeholder="Find articles..."></li>
+    <li><button type="button" style="background-color: #580078; color:white; border: 1px solid #580078;" class="button">Search</button> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Body -->
+<div class="body" style="margin-top:20px; flex: 1 0 auto">
+  {% block body %}
+  {% endblock %}
+</div>
+
+<!-- Footer with contact info -->
+
+<style>
+    footer {
+      flex-shrink: 0;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+</style>
+
+<footer>
+    <span style="display: block; color: white">Contact us: <a style="color:white; text-decoration: underline;" href="mailto:physiome@physiomeproject.org">physiome@physiomeproject.org</a></span>
+    <span style="display: block; color: white">Meet our <a style="color:white; text-decoration: underline" href="{{site_root}}editorial-board">Editorial Board</a></span>
+    <span style="display: block; colour: white;">Supported by:</span>
+    <p><a href="http://www.iups.org/"><img src="{{asset_root}}iups.svg" alt="Physiome logo" style="width:8%;height:8%;"></a> <a href="https://www.vph-institute.org/"><img src="{{asset_root}}Horizonal_Online.png" alt="VPH logo" style="width:22%;height:22%;"></a> <a href="https://www.auckland.ac.nz/en/abi.html"><img src="{{asset_root}}abi-hc-rgb.png" alt="ABI logo" style="width:30%;height:30%;"></a> <a href="https://www.digital-science.com/"><img src="{{asset_root}}ds-logo-bw.png" alt="Digital Science logo" style="width:15%;height:15%;"></a></p>
+</footer>

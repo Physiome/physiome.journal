@@ -46,12 +46,38 @@ setup(
     include_package_data=True,
     package_json=package_json,
     install_requires=[
+        'markdown',
         'Jinja2>=2.4',
+
         'calmjs>=3.4.1',
-        'nunja',
+        'calmjs.sassy[libsass]',
+
+        'nunja'
+        ' @ git+https://github.com/calmjs/nunja.git@master',
+        'repodono.model[flask] '
+        ' @ git+https://github.com/repodono/repodono.model.git@demo',
+        'repodono.task'
+        ' @ git+https://github.com/repodono/repodono.task.git@master',
+        'repodono.nunja'
+        ' @ git+https://github.com/repodono/repodono.nunja.git@master',
     ],
     python_requires='>=3.6',
     extras_require={},
-    entry_points={},
+    build_calmjs_artifacts=True,
+    entry_points={
+        'nunja.mold': [
+            'physiome.journal.molds = physiome.journal:molds',
+        ],
+        'calmjs.module': [
+            'physiome.journal = physiome.journal',
+        ],
+        'calmjs.scss': [
+            'physiome.journal = physiome.journal',
+        ],
+        'calmjs.artifacts': [
+            'styles.css = calmjs.sassy.artifact:complete_css',
+            'styles.min.css = calmjs.sassy.artifact:complete_compressed_css',
+        ],
+    },
     test_suite="physiome.journal.tests.make_suite",
 )

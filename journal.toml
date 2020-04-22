@@ -1,0 +1,163 @@
+[settings.pika]
+host = "localhost"
+timeout = 1
+
+[settings.flask]
+port = 9000
+debug = true
+
+[environment.variables]  # strings??
+site_root = "/"
+root_mold_id = "nunja.molds/html5"
+asset_root = "/assets/"
+artifact_root = "/artifact/"
+
+[environment.paths]
+document_root = "src/physiome/journal/pages"
+generated_root = "/tmp/site/journal"
+
+[metadata.paths]
+generated_root = "/tmp/metadata/journal"
+
+# Repodono system variables and objects?
+
+[environment.variables.resource_map]
+"abi-hc-rgb.png" = "physiome.journal.molds/original_template/images/abi-hc-rgb.png"
+"associated-branding.png" = "physiome.journal.molds/original_template/images/associated-branding.png"
+"CurationAndSubmissionFlow.png" = "physiome.journal.molds/original_template/images/CurationAndSubmissionFlow.png"
+"ds-logo-bw.png" = "physiome.journal.molds/original_template/images/ds-logo-bw.png"
+"Fulltext_button.svg" = "physiome.journal.molds/original_template/images/Fulltext_button.svg"
+"Horizonal_Online.png" = "physiome.journal.molds/original_template/images/Horizonal_Online.png"
+"iups.svg" = "physiome.journal.molds/original_template/images/iups.svg"
+"Physiome-beside-middle.png" = "physiome.journal.molds/original_template/images/Physiome-beside-middle.png"
+"Physiome-beside.png" = "physiome.journal.molds/original_template/images/Physiome-beside.png"
+"PMR_button.svg" = "physiome.journal.molds/original_template/images/PMR_button.svg"
+"Run_button.svg" = "physiome.journal.molds/original_template/images/Run_button.svg"
+
+[environment.variables.styles]
+"style.css" = "physiome.journal:styles.min.css"
+[environment.variables.scripts]
+# "bundle.js" = "physiome.journal:webpack.js"
+
+[environment.variables.css_class]
+table = 'pure-table'
+
+[[environment.objects]]
+__name__ = "artifact_map"
+__init__ = "repodono.model.base:FlatGroupedMapping"
+mappings = ["styles", "scripts"]
+
+[[environment.objects]]
+__name__ = "nunja_renderer"
+__init__ = "repodono.nunja.render:NunjaRenderer"
+
+[[environment.objects]]
+__name__ = "mold_data_provider"
+__init__ = "repodono.nunja.render:MoldDataProvider"
+mapping = "resource_map"
+
+[[environment.objects]]
+__name__ = "artifact_provider"
+__init__ = "repodono.nunja.render:ArtifactProvider"
+mapping = "artifact_map"
+
+[default.variables]
+nunja_part_data = {}
+
+# layout of the system (probably does not belong as part of environment)
+
+[bucket._]
+__roots__ = ["generated_root"]
+accept = ["*/*"]
+
+# assets/artifacts resource and endpoint definitions
+[[resource."/assets/{filename}"]]
+__name__ = "mold_data_resource"
+__call__ = "mold_data_provider"
+filename = "filename"
+[endpoint._."/assets/{filename}"]
+__provider__ = "mold_data_resource"
+
+[[resource."/artifact/{filename}"]]
+__name__ = "artifact_resource"
+__call__ = "artifact_provider"
+filename = "filename"
+[endpoint._."/artifact/{filename}"]
+__provider__ = "artifact_resource"
+
+# markdown
+
+[[resource."/"]]
+# instances of this will be modified, so it must be defined per resource
+__name__ = "markdown"
+__init__ = "markdown:Markdown"
+extensions = ["'meta'"]
+
+[[resource."/"]]
+__name__ = "page_loader"
+__init__ = "repodono.task.root:FilterFextRoot"
+root = "document_root"
+fext_filters = [
+    ["'.md'", "markdown.convert"]
+]
+
+# nunja stuff
+# TODO reorganise these stubs at some point
+
+[[resource."/"]]
+__name__ = "nunja_page"
+__call__ = "nunja_renderer"
+mold_id = "root_mold_id"
+data.css = "styles"
+data.js = "scripts"
+data.title = "nunja_full_title"
+data.body = "nunja_part"
+data.artifact_root = "artifact_root"
+data.asset_root = "asset_root"
+
+[[resource."/"]]
+__name__ = "nunja_page_part"
+__call__ = "nunja_renderer.render"
+mold_id = "nunja_part_mold_id"
+data = "nunja_part_data"
+
+[[resource."/"]]
+__name__ = "nunja_index_part"
+__call__ = "nunja_renderer.render_template"
+mold_id_template = "'physiome.journal.molds/original_template/index.nja'"
+data = "nunja_part_data"
+
+# preset pages for the journal
+
+[[resource."/{page}"]]
+__name__ = "raw_page"
+__call__ = "page_loader.text"
+target = "page"
+
+[localmap."/"]
+nunja_part_data = "data"
+nunja_part = "nunja_index_part"
+data.site_root = "site_root"
+data.asset_root = "asset_root"
+
+[endpoint._."/"]
+__provider__ = "nunja_page"
+__root__ = "generated_root"
+__filename__ = "index.html"
+nunja_part_mold_id = "physiome.journal.molds/original_template"
+nunja_full_title = "Physiome Journal - Home"
+
+[localmap."/{page}"]
+nunja_part_data = "data"
+nunja_part = "nunja_page_part"
+data.content = "raw_page"
+data.site_root = "site_root"
+data.asset_root = "asset_root"
+
+[endpoint._."/{page}"]
+__provider__ = "nunja_page"
+__root__ = "generated_root"
+__filename__ = "index.html"
+nunja_part_mold_id = "physiome.journal.molds/original_template"
+# TODO figure out how to override this from the slugs
+nunja_full_title = "Physiome Journal"

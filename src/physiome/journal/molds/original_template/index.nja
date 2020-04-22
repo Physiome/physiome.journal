@@ -1,0 +1,53 @@
+{% extends 'physiome.journal.molds/original_template/base.nja' %}
+{% block body %}
+<div class="row">
+<div class="callout">
+    <p><em>Physiome</em> publishes reproducible and reusable mathematical models of physiological processes where the experimental details and model validation have been published or accepted for publication in a recognised 'primary' peer-reviewed journal. <em>Physiome</em> curators will help authors ensure that models and simulation experiments are made available using appropriate community standards prior to acceptance for publication in <em>Physiome</em>. When aspects of a computational modelling study are not able to be encoded in standard formats, <em>Physiome</em> curators will help authors ensure their work is as open, reproducible, and reusable as possible.</p>
+    <p><em>Physiome</em> editors will help as much as is currently possible with model curation and annotation to ensure that the modeling results claimed in the primary paper are consistent with the published model. <em>Physiome</em> is open access with a low Author Processing Charge. Models can be displayed and, in some cases, run directly from the journal website with freely available open source software.</p>
+    
+    <p>Meet our <a style="color:#580078" href="{{site_root}}editorial-board.html">Editorial Board.</a></p>
+  
+  <div style = "text-align: center;">
+
+      <style>
+          .button {
+              border: 1px solid #580078;
+              background-color: #580078;
+              color: white;
+              padding: 15px 25px;
+              text-align: center;
+              font-size: 16px;
+              vertical-align: middle;
+              cursor: pointer;
+              margin-bottom: 0;
+          }
+      </style>
+      <a href="instructions-to-authors" class="button">How do I submit a paper?</a>
+
+  </div>
+  <div style="text-align: center; font-size: 16px">(Accepting submissions from 1st of March 2020)</div>
+
+  </p>
+</div>
+
+
+<div style = "text-align: center; color:#580078">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wuhLl_DpQ5c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
+
+<div style = "text-align: left; color:#580078">
+
+    
+
+  <h3>Latest articles</h3>
+
+  {#{ pub.pubtable(articles_page.object_list[:9]) }#}
+
+  <p><a style="color:#580078" href="{{site_root}}articles">See all articles...</a></p>
+
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends 'physiome.journal.molds/original_template/base.nja' %}
+{% block title %}{{page.title}}{% endblock %}
+{% block body %}
+{{page.content}}
+{% endblock %}
