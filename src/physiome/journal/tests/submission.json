@@ -1,0 +1,50 @@
+{
+    "kind": "original",
+    "title": "Example article title",
+    "abstract": "We describe an example paper here",
+    "publishDate": "2020-04-20T00:00:00.000Z",
+    "authors": [
+        {
+            "id": 1,
+            "name": "John Smith"
+        },
+        {
+            "id": 2,
+            "name": "Jane Susan Dobson"
+        },
+        {
+            "id": 3,
+            "name": "Peter Doe"
+        }
+    ],
+    "modelSource": "pmr-workspace",
+    "modelPmrWorkspaceUri": "https://models.example.org/workspace/240",
+    "primaryPapers": [
+        {
+            "id": 1,
+            "doi": "10.0999/ex.2020.00",
+            "link": "https://www.example.org/articles/10.0999/ex.2020.00/pdf",
+            "type": "article",
+            "year": 2020,
+            "issue": "1",
+            "pages": "720",
+            "pubId": "pub.0000000001",
+            "title": "Example primary paper",
+            "volume": "10",
+            "authors": [
+                {
+                    "id": "",
+                    "lastName": "Smith",
+                    "firstName": "Brown",
+                    "researcherId": ""
+                },
+                {
+                    "id": "ur.00000000001.01",
+                    "lastName": "Dobson",
+                    "firstName": "Jane Susan",
+                    "researcherId": "ur.00000000001.01"
+                }
+            ]
+        }
+    ]
+}
