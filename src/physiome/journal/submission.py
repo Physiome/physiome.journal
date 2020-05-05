@@ -19,4 +19,18 @@ def json_to_markdown_stream(data, stream=None):
     ))
     stream.write('MathsURL:\n')
     stream.write('PMRURL: %s\n' % data['modelPmrWorkspaceUri'])
+    stream.write('RunModelURL:\n')
+    stream.write('PrimaryPaperName: %s. %s, %s\n' % (
+        data['primaryPapers'][0]['title'],
+        data['primaryPapers'][0]['year'],
+        ', '.join(('%s. %s' % (
+            '.'.join(fn[0] for fn in author['firstName'].split()),
+            author['lastName'],
+        ) for author in data['primaryPapers'][0]['authors']))
+    ))
+    stream.write('PrimaryPaperURL: https://doi.org/%s\n' % (
+        data['primaryPapers'][0]['doi'],))
+    stream.write('FulltextURL: %s\n' % data['primaryPapers'][0]['link'])
+    stream.write('ArchiveURL: %s\n' % data['primaryPapers'][0]['link'])
+    stream.write('Abstract: %s\n' % data['abstract'])
     return stream

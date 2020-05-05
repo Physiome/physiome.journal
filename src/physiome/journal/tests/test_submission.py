@@ -22,4 +22,10 @@ class SubmissionTestCase(unittest.TestCase):
             Doe, P.
         MathsURL:
         PMRURL: https://models.example.org/workspace/240
+        RunModelURL:
+        PrimaryPaperName: Example primary paper. 2020, B. Smith, J.S. Dobson
+        PrimaryPaperURL: https://doi.org/10.0999/ex.2020.00
+        FulltextURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
+        ArchiveURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
+        Abstract: We describe an example paper here
         ''').lstrip(), value)
