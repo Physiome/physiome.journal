@@ -10,7 +10,7 @@ def json_to_markdown_stream(data, stream=None):
         stream = StringIO()
 
     stream.write('Slug:\n')
-    stream.write('DOI:\n')  # should be in the export?
+    stream.write('DOI: %s\n' % data['figshareArticleDoi'])
     stream.write('Title: %s\n' % data['title'])
     stream.write('Date: %s\n' % data['publishDate'][:10])
     stream.write('PubAuthors: %s\n' % '\n    '.join('%s, %s.' % (

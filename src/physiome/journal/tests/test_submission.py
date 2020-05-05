@@ -14,7 +14,7 @@ class SubmissionTestCase(unittest.TestCase):
         value = submission.json_to_markdown(data)
         self.assertEqual(dedent('''
         Slug:
-        DOI:
+        DOI: 10.0998/FK2.stagefigshare.0000001
         Title: Example article title
         Date: 2020-04-20
         PubAuthors: Smith, J.
