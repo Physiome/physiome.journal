@@ -1,0 +1,146 @@
+[settings.pika]
+host = "localhost"
+timeout = 1
+
+[settings.flask]
+port = 9000
+debug = true
+
+[environment.variables]  # strings??
+site_root = "/"
+root_mold_id = "nunja.molds/html5"
+asset_root = "/assets/"
+artifact_root = "/artifact/"
+
+[environment.paths]
+physiome_coko_published = "/tmp/physiome-coko/published"
+generated_root = "/tmp/site/journal"
+
+[metadata.paths]
+generated_root = "/tmp/metadata/journal"
+
+# Repodono system variables and objects?
+
+[environment.variables.resource_map]
+
+[environment.variables.styles]
+
+[environment.variables.scripts]
+
+[environment.variables.css_class]
+
+[[environment.objects]]
+__name__ = "artifact_map"
+__init__ = "repodono.model.base:FlatGroupedMapping"
+mappings = ["styles", "scripts"]
+
+[[environment.objects]]
+__name__ = "nunja_renderer"
+__init__ = "repodono.nunja.render:NunjaRenderer"
+
+[[environment.objects]]
+__name__ = "mold_data_provider"
+__init__ = "repodono.nunja.render:MoldDataProvider"
+mapping = "resource_map"
+
+[[environment.objects]]
+__name__ = "artifact_provider"
+__init__ = "repodono.nunja.render:ArtifactProvider"
+mapping = "artifact_map"
+
+[default.variables]
+nunja_part_data = {}
+
+# layout of the system (probably does not belong as part of environment)
+
+[bucket._]
+__roots__ = ["generated_root"]
+accept = ["*/*"]
+
+# assets/artifacts resource and endpoint definitions
+[[resource."/assets/{filename}"]]
+__name__ = "mold_data_resource"
+__call__ = "mold_data_provider"
+filename = "filename"
+[endpoint._."/assets/{filename}"]
+__provider__ = "mold_data_resource"
+
+[[resource."/artifact/{filename}"]]
+__name__ = "artifact_resource"
+__call__ = "artifact_provider"
+filename = "filename"
+[endpoint._."/artifact/{filename}"]
+__provider__ = "artifact_resource"
+
+# nunja stuff
+# TODO reorganise these stubs at some point
+
+[[resource."/"]]
+__name__ = "nunja_page"
+__call__ = "nunja_renderer"
+mold_id = "root_mold_id"
+data.css = "styles"
+data.js = "scripts"
+data.title = "nunja_full_title"
+data.body = "nunja_page_part"
+data.artifact_root = "artifact_root"
+data.asset_root = "asset_root"
+
+[[resource."/"]]
+__name__ = "nunja_page_part_render"
+__call__ = "nunja_renderer.render"
+mold_id = "nunja_part_mold_id"
+data = "nunja_part_data"
+
+# submission system root
+
+[[resource."/"]]
+__name__ = "json_published_root"
+__init__ = "repodono.task.root:FSRoot"
+root = "physiome_coko_published"
+
+[[resource."/published/"]]
+__name__ = "journal_json_list"
+__call__ = "json_published_root.listdir_parts"
+target = "''"
+
+[localmap."/published/"]
+data.items = "journal_json_list"
+nunja_page_part = "nunja_page_part_render"
+nunja_part_data = "data"
+
+[endpoint._."/published/"]
+__provider__ = "nunja_page"
+__root__ = "generated_root"
+__filename__ = "index.html"
+nunja_full_title = "Listing of Published Physiome Journal Submissions"
+nunja_part_mold_id = "physiome.journal.molds/raw_published_listing"
+
+[[resource."/published/{submission_id}"]]
+__name__ = "journal_json"
+__call__ = "json_published_root.text"
+target = "submission_id"
+
+[[resource."/published/{submission_id}"]]
+__name__ = "journal_stub"
+__init__ = "physiome.journal.submission:json_to_markdown"
+data = "journal_json"
+
+[[resource."/published/{submission_id}"]]
+__name__ = "journal_entry_part"
+__call__ = "nunja_renderer.render_template"
+mold_id_template = "'physiome.journal.molds/raw_published_listing/render.nja'"
+data = "nunja_part_data"
+
+[localmap."/published/{submission_id}"]
+data.journal_json = "journal_json"
+data.journal_stub = "journal_stub"
+nunja_page_part = "journal_entry_part"
+nunja_part_data = "data"
+
+[endpoint._."/published/{submission_id}"]
+__provider__ = "nunja_page"
+__root__ = "generated_root"
+__filename__ = "index.html"
+nunja_full_title = "Journal Submission"
+nunja_part_mold_id = "root_mold_id"
