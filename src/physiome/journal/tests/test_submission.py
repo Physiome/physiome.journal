@@ -13,7 +13,7 @@ class SubmissionTestCase(unittest.TestCase):
             'physiome.journal.tests', 'submission.json'))
         value = submission.json_to_markdown(data)
         self.assertEqual(dedent('''
-        Slug:
+        Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
         Title: Example article title
         Date: 2020-04-20
