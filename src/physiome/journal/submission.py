@@ -1,3 +1,4 @@
+import json
 from io import StringIO
 
 
@@ -6,6 +7,9 @@ def json_to_markdown(data):
 
 
 def json_to_markdown_stream(data, stream=None):
+    if isinstance(data, (bytes, str)):
+        data = json.loads(data)
+
     if stream is None:
         stream = StringIO()
 
