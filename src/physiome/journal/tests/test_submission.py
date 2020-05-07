@@ -17,9 +17,16 @@ class SubmissionTestCase(unittest.TestCase):
         DOI: 10.0998/FK2.stagefigshare.0000001
         Title: Example article title
         Date: 2020-04-20
+        SubmissionDate: 2020-04-19
+        PublishDate: 2020-04-20
+        LastPublishDate: 2020-04-30
+        Kind: original
         PubAuthors: Smith, J.
             Dobson, J. S.
             Doe, P.
+        PubAuthorsORCID: 0000-0000-0000-0001
+            0000-0000-0000-0003
+            0000-0000-0000-0002
         MathsURL:
         PMRURL: https://models.example.org/workspace/240
         RunModelURL:
@@ -39,9 +46,16 @@ class SubmissionTestCase(unittest.TestCase):
         DOI: 10.0998/FK2.stagefigshare.0000001
         Title: Example article title
         Date: 2020-04-20
+        SubmissionDate: 2020-04-19
+        PublishDate: 2020-04-20
+        LastPublishDate: 2020-04-30
+        Kind: original
         PubAuthors: Smith, J.
             Dobson, J. S.
             Doe, P.
+        PubAuthorsORCID: 0000-0000-0000-0001
+            0000-0000-0000-0003
+            0000-0000-0000-0002
         MathsURL:
         PMRURL: https://models.example.org/workspace/240
         RunModelURL:
