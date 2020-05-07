@@ -83,7 +83,7 @@ class SubmissionTestCase(unittest.TestCase):
             Dobson, J. S.
             Doe, P.
         PubAuthorsORCID: 0000-0000-0000-0001
-            null
+            \u200b
             0000-0000-0000-0002
         MathsURL:
         PMRURL: https://models.example.org/workspace/240

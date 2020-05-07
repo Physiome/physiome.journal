@@ -27,7 +27,7 @@ def json_to_markdown_stream(data, stream=None):
         for name in (author['name'].split() for author in data['authors'])
     ))
     stream.write('PubAuthorsORCID: %s\n' % '\n    '.join(
-        author['orcid'] or 'null' for author in data['authors']
+        author['orcid'] or '\u200b' for author in data['authors']
     ))
     stream.write('MathsURL:\n')
     stream.write('PMRURL: %s\n' % data['modelPmrWorkspaceUri'])
