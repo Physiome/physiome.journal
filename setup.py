@@ -53,7 +53,7 @@ setup(
         'calmjs.sassy[libsass]',
 
         'nunja'
-        ' @ git+https://github.com/calmjs/nunja.git@master',
+        ' @ git+https://github.com/metatoaster/nunja.git@nunja_jinja',
         'repodono.model[flask] '
         ' @ git+https://github.com/repodono/repodono.model.git@demo',
         'repodono.task'
@@ -67,6 +67,9 @@ setup(
     entry_points={
         'nunja.mold': [
             'physiome.journal.molds = physiome.journal:molds',
+        ],
+        'nunja.tmpl': [
+            'physiome.journal.templates = physiome.journal:templates',
         ],
         'calmjs.module': [
             'physiome.journal = physiome.journal',

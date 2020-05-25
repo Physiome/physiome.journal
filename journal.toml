@@ -48,6 +48,10 @@ __init__ = "repodono.model.base:FlatGroupedMapping"
 mappings = ["styles", "scripts"]
 
 [[environment.objects]]
+__name__ = "jinja_renderer"
+__init__ = "repodono.nunja.render:JinjaRenderer"
+
+[[environment.objects]]
 __name__ = "nunja_renderer"
 __init__ = "repodono.nunja.render:NunjaRenderer"
 
@@ -127,6 +131,23 @@ __call__ = "nunja_renderer.render_template"
 mold_id_template = "'physiome.journal.molds/original_template/index.nja'"
 data = "nunja_part_data"
 
+# jinja via nunja
+
+[[resource."/"]]
+__name__ = "std_jinja_template_loader"
+__call__ = "jinja_renderer.load_template"
+template_id = "template_id"
+
+[[resource."/"]]
+__name__ = "std_jinja_template"
+__call__ = "std_jinja_template_loader.prerender"
+
+__nunja_base_jinja__ = "'nunja.tmpl/builtin/html5.nja'"
+__nunja_js_prefix__ = "'/artifact/'"
+__nunja_css_prefix__ = "'/artifact/'"
+css_src = "styles"
+js_src = "scripts"
+
 # preset pages for the journal
 
 [[resource."/{page}"]]
@@ -134,18 +155,38 @@ __name__ = "raw_page"
 __call__ = "page_loader.text"
 target = "page"
 
+[[resource."/{page}"]]
+__name__ = "jinja_page"
+__call__ = "std_jinja_template"
+content = "raw_page"
+asset_root = "asset_root"
+title = "page"
+
 [localmap."/"]
 nunja_part_data = "data"
 nunja_part = "nunja_index_part"
 data.site_root = "site_root"
 data.asset_root = "asset_root"
 
+# [endpoint._."/"]
+# __provider__ = "nunja_page"
+# __root__ = "generated_root"
+# __filename__ = "index.html"
+# nunja_part_mold_id = "physiome.journal.molds/original_template"
+# nunja_full_title = "Physiome Journal - Home"
+
+[[resource."/"]]
+__name__ = "jinja_page"
+__call__ = "std_jinja_template"
+asset_root = "asset_root"
+title = "title"
+
 [endpoint._."/"]
-__provider__ = "nunja_page"
+__provider__ = "jinja_page"
 __root__ = "generated_root"
 __filename__ = "index.html"
-nunja_part_mold_id = "physiome.journal.molds/original_template"
-nunja_full_title = "Physiome Journal - Home"
+template_id = "physiome.journal.templates/main/index.nja"
+title = "Home"
 
 [localmap."/{page}"]
 nunja_part_data = "data"
@@ -154,10 +195,17 @@ data.content = "raw_page"
 data.site_root = "site_root"
 data.asset_root = "asset_root"
 
+# [endpoint._."/{page}"]
+# __provider__ = "nunja_page"
+# __root__ = "generated_root"
+# __filename__ = "index.html"
+# nunja_part_mold_id = "physiome.journal.molds/original_template"
+# # TODO figure out how to override this from the slugs
+# nunja_full_title = "Physiome Journal"
+
 [endpoint._."/{page}"]
-__provider__ = "nunja_page"
+__provider__ = "jinja_page"
 __root__ = "generated_root"
 __filename__ = "index.html"
-nunja_part_mold_id = "physiome.journal.molds/original_template"
+template_id = "physiome.journal.templates/main/template.nja"
 # TODO figure out how to override this from the slugs
-nunja_full_title = "Physiome Journal"

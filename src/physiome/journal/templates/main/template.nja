@@ -1,0 +1,5 @@
+{% extends 'physiome.journal.templates/main/base.nja' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+  <div class="row">{{ content|safe }}</div>
+{% endblock %}
