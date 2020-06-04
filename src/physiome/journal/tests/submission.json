@@ -53,5 +53,17 @@
             ]
         }
     ],
-    "figshareArticleDoi": "10.0998/FK2.stagefigshare.0000001"
+    "figshareArticleDoi": "10.0998/FK2.stagefigshare.0000001",
+    "curator": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "created": "2020-01-01T00:00:00.000Z",
+        "updated": "2020-01-01T00:00:00.000Z",
+        "type": "orcid",
+        "identityId": "1000-0000-0000-0004",
+        "displayName": "Mr. Curator",
+        "displayAffiliation": null,
+        "lastLoginDate": null,
+        "email": "mr.curator@example.com",
+        "isValidatedEmail": true
+    }
 }

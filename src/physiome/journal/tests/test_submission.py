@@ -20,20 +20,19 @@ class SubmissionTestCase(unittest.TestCase):
         SubmissionDate: 2020-04-19
         PublishDate: 2020-04-20
         LastPublishDate: 2020-04-30
-        Kind: original
+        Curator: Mr. Curator
+        Kind: Original Article
         PubAuthors: Smith, J.
             Dobson, J. S.
             Doe, P.
         PubAuthorsORCID: 0000-0000-0000-0001
             0000-0000-0000-0003
             0000-0000-0000-0002
-        MathsURL:
         PMRURL: https://models.example.org/workspace/240
-        RunModelURL:
         PrimaryPaperName: Example primary paper. 2020, B. Smith, J.S. Dobson
         PrimaryPaperURL: https://doi.org/10.0999/ex.2020.00
-        FulltextURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
-        ArchiveURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
+        FulltextURL:
+        ArchiveURL:
         Abstract: We describe an example paper here
         ''').lstrip(), value)
 
@@ -49,20 +48,19 @@ class SubmissionTestCase(unittest.TestCase):
         SubmissionDate: 2020-04-19
         PublishDate: 2020-04-20
         LastPublishDate: 2020-04-30
-        Kind: original
+        Curator: Mr. Curator
+        Kind: Original Article
         PubAuthors: Smith, J.
             Dobson, J. S.
             Doe, P.
         PubAuthorsORCID: 0000-0000-0000-0001
             0000-0000-0000-0003
             0000-0000-0000-0002
-        MathsURL:
         PMRURL: https://models.example.org/workspace/240
-        RunModelURL:
         PrimaryPaperName: Example primary paper. 2020, B. Smith, J.S. Dobson
         PrimaryPaperURL: https://doi.org/10.0999/ex.2020.00
-        FulltextURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
-        ArchiveURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
+        FulltextURL:
+        ArchiveURL:
         Abstract: We describe an example paper here
         ''').lstrip(), value)
 
@@ -70,6 +68,7 @@ class SubmissionTestCase(unittest.TestCase):
         data = pkg_resources.resource_string(
             'physiome.journal.tests', 'submission_with_null_orcid.json')
         value = submission.json_to_markdown(data)
+        # curator is also missing in this export.
         self.assertEqual(dedent('''
         Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
@@ -78,19 +77,18 @@ class SubmissionTestCase(unittest.TestCase):
         SubmissionDate: 2020-04-19
         PublishDate: 2020-04-20
         LastPublishDate: 2020-04-30
-        Kind: original
+        Curator:
+        Kind: Original Article
         PubAuthors: Smith, J.
             Dobson, J. S.
             Doe, P.
         PubAuthorsORCID: 0000-0000-0000-0001
             \u200b
             0000-0000-0000-0002
-        MathsURL:
         PMRURL: https://models.example.org/workspace/240
-        RunModelURL:
         PrimaryPaperName: Example primary paper. 2020, B. Smith, J.S. Dobson
         PrimaryPaperURL: https://doi.org/10.0999/ex.2020.00
-        FulltextURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
-        ArchiveURL: https://www.example.org/articles/10.0999/ex.2020.00/pdf
+        FulltextURL:
+        ArchiveURL:
         Abstract: We describe an example paper here
         ''').lstrip(), value)
