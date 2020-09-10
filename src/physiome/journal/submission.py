@@ -26,6 +26,8 @@ def json_to_markdown_stream(data, stream=None):
 
     stream.write('Slug: %s\n' % data['figshareArticleDoi'])
     stream.write('DOI: %s\n' % data['figshareArticleDoi'])
+    stream.write('SubmissionID: %s\n' % data['id'])
+    stream.write('ManuscriptID: %s\n' % data['manuscriptId'])
     stream.write('Title: %s\n' % data['title'])
     stream.write('Date: %s\n' % data['publishDate'][:10])
     stream.write('SubmissionDate: %s\n' % data['submissionDate'][:10])

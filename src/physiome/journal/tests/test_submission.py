@@ -15,6 +15,8 @@ class SubmissionTestCase(unittest.TestCase):
         self.assertEqual(dedent('''
         Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
+        SubmissionID: 00000000-0000-0000-0000-000000000001
+        ManuscriptID: S000001
         Title: Example article title
         Date: 2020-04-20
         SubmissionDate: 2020-04-19
@@ -43,6 +45,8 @@ class SubmissionTestCase(unittest.TestCase):
         self.assertEqual(dedent('''
         Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
+        SubmissionID: 00000000-0000-0000-0000-000000000001
+        ManuscriptID: S000001
         Title: Example article title
         Date: 2020-04-20
         SubmissionDate: 2020-04-19
@@ -72,6 +76,8 @@ class SubmissionTestCase(unittest.TestCase):
         self.assertEqual(dedent('''
         Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
+        SubmissionID: 00000000-0000-0000-0000-000000000002
+        ManuscriptID: S000002
         Title: Example article title
         Date: 2020-04-20
         SubmissionDate: 2020-04-19
@@ -101,6 +107,8 @@ class SubmissionTestCase(unittest.TestCase):
         self.assertEqual(dedent('''
         Slug: 10.0998/FK2.stagefigshare.0000001
         DOI: 10.0998/FK2.stagefigshare.0000001
+        SubmissionID: 00000000-0000-0000-0000-000000000003
+        ManuscriptID: S000003
         Title: Example article title
         Date: 2020-04-20
         SubmissionDate: 2020-04-19
