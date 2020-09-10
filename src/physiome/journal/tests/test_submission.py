@@ -124,7 +124,7 @@ class SubmissionTestCase(unittest.TestCase):
             0000-0000-0000-0002
         PMRURL: https://models.example.org/workspace/240
         PrimaryPaperName: Example primary paper. 2020, B. Smith, J.S. Dobson
-        PrimaryPaperURL: https://doi.org/10.0999/ex.2020.00
+        PrimaryPaperURL:
         FulltextURL:
         ArchiveURL:
         Abstract: We describe an example paper here

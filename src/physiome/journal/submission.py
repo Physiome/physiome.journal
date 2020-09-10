@@ -60,8 +60,12 @@ def json_to_markdown_stream(data, stream=None):
     else:
         stream.write('%s\n' % (data['primaryPapers'][0]['authors']))
 
-    stream.write('PrimaryPaperURL: https://doi.org/%s\n' % (
-        data['primaryPapers'][0]['doi'],))
+    stream.write('PrimaryPaperURL:')
+    if 'doi' in data['primaryPapers'][0]:
+        stream.write(' https://doi.org/%s\n' % data['primaryPapers'][0]['doi'])
+    else:
+        stream.write('\n')
+
     # stream.write('FulltextURL: %s\n' % data['primaryPapers'][0]['link'])
     # stream.write('ArchiveURL: %s\n' % data['primaryPapers'][0]['link'])
     stream.write('FulltextURL:\n')

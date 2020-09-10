@@ -30,7 +30,6 @@
     "primaryPapers": [
         {
             "id": 1,
-            "doi": "10.0999/ex.2020.00",
             "link": "https://www.example.org/articles/10.0999/ex.2020.00/pdf",
             "type": "article",
             "year": 2020,
