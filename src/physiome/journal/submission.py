@@ -22,7 +22,10 @@ def json_to_markdown_stream(data, stream=None):
     if stream is None:
         stream = StringIO()
     curator_name = (
-        ' %s' % data['curator']['displayName'] if 'curator' in data else '')
+        ' %s' % data['curator']['displayName']
+        if 'curator' in data and data['curator']
+        and 'displayName' in data['curator']
+        else '')
 
     stream.write('Slug: %s\n' % data['figshareArticleDoi'])
     stream.write('DOI: %s\n' % data['figshareArticleDoi'])
